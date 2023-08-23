@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  hotel-service:
+    container_name: hotel-service
+    build:
+      context: hotel
+      dockerfile: Dockerfile
+    image: hotel-service
+    networks:
+      - hotel-services-network
+    ports: # ONLY FOR LOCAL DEBUGGING
+      - 10001:10001
+  customer-profile-service:
+    container_name: customer-profile-service
+    build:
+      context: customerProfile
+      dockerfile: Dockerfile
+    image: customer-profile-service
+    networks:
+      - hotel-services-network
+    ports: # ONLY FOR LOCAL DEBUGGING
+      - 10003:10003
+  hotel-reviews-service:
+    container_name: hotel-reviews-service
+    build:
+      context: hotelReviews
+      dockerfile: Dockerfile
+    image: hotel-reviews-service
+    networks:
+      - hotel-services-network
+    ports: # ONLY FOR LOCAL DEBUGGING
+      - 10002:10002
+
+networks:
+    hotel-services-network:
+        driver: bridge
